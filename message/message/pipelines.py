@@ -51,7 +51,7 @@ class MySQLStorePipeline(object):
     def __init__(self):
         dbargs = dict(
              host = '127.0.0.1',
-             db = 'message',
+             db = 'hitnew',
              user = 'root',
              passwd = 'lin952787655',
              #cursorclass = MySQLdb.cursors.DictCursor,
@@ -70,5 +70,6 @@ class MySQLStorePipeline(object):
         #print item['title']
         #print item['url_next']
         #print item['text']
-        conn.execute('insert into textdata(title, url, text) values(%s,%s,%s)', ("http"," http://sdfa","ni"))
+        #set names 'gbk'
+        conn.execute('insert into news(title, url, new) values(%s,%s,%s)', (item['title'],item['url_next'],item['text']))
 
