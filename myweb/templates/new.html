@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta charset="UTF-8">
+    	<title>林翔自制text</title>
+    </head>
+    <h3><a href="http://127.0.0.1:8000/title/">回到title界面</a></h3>
+    <body>
+        <p>新闻内容</p>
+        {% for text in title_new %}
+        <h3>{{text.title}}</h3>
+        <h4>{{text.text}}</h4>
+        <br>
+        {% endfor %}
+        
+    </body>
+</html>

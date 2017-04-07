@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<meta charset="UTF-8">
+    	<title>林翔自制title</title>
+    </head>
+    <h3><a href="http://127.0.0.1:8000/">回到hello界面</a></h3>
+    <body>
+        <p>工大新闻</p>
+        {% for title in title %}
+        <h4><a href="text/?list={{title.id}}">{{title.title}}</a></h4>
+        <br>
+        {% endfor %}
+        
+        <div class="pagination">
+            <span class="step-links">
+                {% if title.has_previous %}
+                    <a href="?page={{title.previous_page_number}}">previous</a>
+                {% endif %}
+
+                <span class="current">
+                    Page{{title.number}} of {{ title.paginator.num_pages}}.
+                </span>
+
+                {% if title.has_next %}
+                    <a href="?page={{ title.next_page_number}}">next</a>
+                {% endif %}
+            </span>
+        </div>
+    </body>
+</html>
