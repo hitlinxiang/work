@@ -67,9 +67,5 @@ class MySQLStorePipeline(object):
 
 
     def insert_into_table(self,conn,item):
-        #print item['title']
-        #print item['url_next']
-        #print item['text']
-        #set names 'gbk'
         conn.execute('insert into news(title, url, new) values(%s,%s,%s)', (item['title'],item['url_next'],item['text']))
 

@@ -15,17 +15,23 @@ class hit_spider(scrapy.Spider):
             yield scrapy.Request(item_url,callback=self.parse_url)
             #yield item
     def parse_url(self,response):
-        item = MessageItem()
+        #item = MessageItem()
         for box in response.xpath('//li/a[@class = "size14"]'):
-            item['title'] = box.xpath(".//text()").extract()[0].strip()
+            #item['title'] = box.xpath(".//text()").extract()[0].strip()
+            title = box.xpath(".//text()").extract()[0].strip()
             url = "http://news.hitwh.edu.cn/"+ box.xpath(".//@href").extract()[0]
-            item['url_next'] = url
-            yield scrapy.Request(url,meta={'item':item},callback=self.parse_item)
+            #item['url_next'] = url
+            yield scrapy.Request(url,meta={'title':title,'url':url},callback=self.parse_item)
 
     def parse_item(self,response):
-        item = response.meta['item']
+        title = response.meta['title']
+        url = response.meta['title']
+        items = MessageItem()
+        items['title'] = title
+        items['url_next']=url
         text = " "
         for box in response.xpath('//span'):
             text = text+box.xpath('string(.)').extract()[0]
-        item['text']=text
-        yield item
+        items['text']=text
+        #return text
+        yield items
